@@ -60,7 +60,7 @@ main-build: driver_development_f407.elf secondary-outputs
 
 # Tool invocations
 driver_development_f407.elf driver_development_f407.map: $(OBJS) $(USER_OBJS) C:\Users\erhan\STM32CubeIDE\workspace_f407\driver_development_f407\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "driver_development_f407.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\erhan\STM32CubeIDE\workspace_f407\driver_development_f407\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver_development_f407.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "driver_development_f407.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\erhan\STM32CubeIDE\workspace_f407\driver_development_f407\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver_development_f407.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

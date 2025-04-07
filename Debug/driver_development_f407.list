@@ -27,27 +27,27 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 ._user_heap_stack 00000604  2000001c  2000001c  00020000  2**0
                   ALLOC
- 12 .ARM.attributes 00000030  00000000  00000000  000102ac  2**0
+ 12 .ARM.attributes 0000002a  00000000  00000000  000102ac  2**0
                   CONTENTS, READONLY
- 13 .comment      00000043  00000000  00000000  000102dc  2**0
+ 13 .comment      00000043  00000000  00000000  000102d6  2**0
                   CONTENTS, READONLY
- 14 .debug_info   000000aa  00000000  00000000  0001031f  2**0
+ 14 .debug_info   000000aa  00000000  00000000  00010319  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 00000059  00000000  00000000  000103c9  2**0
+ 15 .debug_abbrev 00000059  00000000  00000000  000103c3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00000048  00000000  00000000  00010428  2**3
+ 16 .debug_aranges 00000048  00000000  00000000  00010420  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_rnglists 0000002c  00000000  00000000  00010470  2**0
+ 17 .debug_rnglists 0000002c  00000000  00000000  00010468  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  00000f64  00000000  00000000  0001049c  2**0
+ 18 .debug_macro  000011a6  00000000  00000000  00010494  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   00000480  00000000  00000000  00011400  2**0
+ 19 .debug_line   000004e2  00000000  00000000  0001163a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    00003bd0  00000000  00000000  00011880  2**0
+ 20 .debug_str    00004985  00000000  00000000  00011b1c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  00000054  00000000  00000000  00015450  2**2
+ 21 .debug_frame  00000054  00000000  00000000  000164a4  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 0000006c  00000000  00000000  000154a4  2**0
+ 22 .debug_line_str 0000006c  00000000  00000000  000164f8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -81,9 +81,9 @@ Disassembly of section .text:
  80001e4:	0800028c 	.word	0x0800028c
 
 080001e8 <main>:
-#if !defined(__SOFT_FP__) && defined(__ARM_FP)
-  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
-#endif
+ */
+
+#include "stm32f407xx.h"
 
 int main(void)
 {
