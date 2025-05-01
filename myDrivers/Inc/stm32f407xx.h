@@ -12,6 +12,9 @@
 
 #define __IO volatile
 #define UNUSED(X) (void)X
+#define SET_BIT(REG, BIT)	( (REG) |= 	(BIT) )
+#define CLEAR_BIT(REG, BIT) ( (REG) &= ~(BIT) )
+#define READ_BIT(REG, BIT)	( (REG) & 	(BIT) )
 
 /*
  * Memory Base Addresses
@@ -177,6 +180,11 @@ typedef struct
 	__IO uint32_t PLLI2SCFGR;		/*!< RCC PLLI2S configuration register 										Address offset: 0x84		*/
 }RCC_TypeDef;
 
+/*
+ * Peripheral Definitions
+ *
+ */
+
 #define GPIOA		( (GPIO_TypeDef *)(GPIOA_BASE) )
 #define GPIOB		( (GPIO_TypeDef *)(GPIOB_BASE) )
 #define GPIOC		( (GPIO_TypeDef *)(GPIOC_BASE) )
@@ -189,5 +197,56 @@ typedef struct
 #define GPIOJ		( (GPIO_TypeDef *)(GPIOJ_BASE) )
 #define GPIOK		( (GPIO_TypeDef *)(GPIOK_BASE) )
 #define RCC			( (RCC_TypeDef *)(RCC_BASE) )
+
+/*
+ * RCC Bit Definitions
+ *
+ */
+
+#define RCC_AHB1ENR_GPIOAEN_Pos			(0U)								// RCC AHB1ENR register GPIOAEN Bit Position
+#define RCC_AHB1ENR_GPIOAEN_Mask 		(0x1 << RCC_AHB1ENR_GPIOAEN_Pos)	// RCC AHB1ENR register GPIOAEN Bit Mask
+#define RCC_AHB1ENR_GPIOAEN				RCC_AHB1ENR_GPIOAEN_Mask			// RCC AHB1ENR register GPIOAEN Macro
+
+#define RCC_AHB1ENR_GPIOBEN_Pos			(1U)								// RCC AHB1ENR register GPIOBEN Bit Position
+#define RCC_AHB1ENR_GPIOBEN_Mask 		(0x1 << RCC_AHB1ENR_GPIOBEN_Pos)	// RCC AHB1ENR register GPIOBEN Bit Mask
+#define RCC_AHB1ENR_GPIOBEN				RCC_AHB1ENR_GPIOBEN_Mask			// RCC AHB1ENR register GPIOBEN Macro
+
+#define RCC_AHB1ENR_GPIOCEN_Pos			(2U)								// RCC AHB1ENR register GPIOCEN Bit Position
+#define RCC_AHB1ENR_GPIOCEN_Mask 		(0x1 << RCC_AHB1ENR_GPIOCEN_Pos)	// RCC AHB1ENR register GPIOCEN Bit Mask
+#define RCC_AHB1ENR_GPIOCEN				RCC_AHB1ENR_GPIOCEN_Mask			// RCC AHB1ENR register GPIOCEN Macro
+
+#define RCC_AHB1ENR_GPIODEN_Pos			(3U)								// RCC AHB1ENR register GPIODEN Bit Position
+#define RCC_AHB1ENR_GPIODEN_Mask 		(0x1 << RCC_AHB1ENR_GPIODEN_Pos)	// RCC AHB1ENR register GPIODEN Bit Mask
+#define RCC_AHB1ENR_GPIODEN				RCC_AHB1ENR_GPIODEN_Mask			// RCC AHB1ENR register GPIODEN Macro
+
+#define RCC_AHB1ENR_GPIOEEN_Pos			(4U)								// RCC AHB1ENR register GPIOEEN Bit Position
+#define RCC_AHB1ENR_GPIOEEN_Mask 		(0x1 << RCC_AHB1ENR_GPIOEEN_Pos)	// RCC AHB1ENR register GPIOEEN Bit Mask
+#define RCC_AHB1ENR_GPIOEEN				RCC_AHB1ENR_GPIOEEN_Mask			// RCC AHB1ENR register GPIOEEN Macro
+
+#define RCC_AHB1ENR_GPIOFEN_Pos			(5U)								// RCC AHB1ENR register GPIOFEN Bit Position
+#define RCC_AHB1ENR_GPIOFEN_Mask 		(0x1 << RCC_AHB1ENR_GPIOFEN_Pos)	// RCC AHB1ENR register GPIOFEN Bit Mask
+#define RCC_AHB1ENR_GPIOFEN				RCC_AHB1ENR_GPIOFEN_Mask			// RCC AHB1ENR register GPIOFEN Macro
+
+#define RCC_AHB1ENR_GPIOGEN_Pos			(6U)								// RCC AHB1ENR register GPIOGEN Bit Position
+#define RCC_AHB1ENR_GPIOGEN_Mask 		(0x1 << RCC_AHB1ENR_GPIOGEN_Pos)	// RCC AHB1ENR register GPIOGEN Bit Mask
+#define RCC_AHB1ENR_GPIOGEN				RCC_AHB1ENR_GPIOGEN_Mask			// RCC AHB1ENR register GPIOGEN Macro
+
+#define RCC_AHB1ENR_GPIOHEN_Pos			(7U)								// RCC AHB1ENR register GPIOHEN Bit Position
+#define RCC_AHB1ENR_GPIOHEN_Mask 		(0x1 << RCC_AHB1ENR_GPIOHEN_Pos)	// RCC AHB1ENR register GPIOHEN Bit Mask
+#define RCC_AHB1ENR_GPIOHEN				RCC_AHB1ENR_GPIOHEN_Mask			// RCC AHB1ENR register GPIOHEN Macro
+
+#define RCC_AHB1ENR_GPIOIEN_Pos			(8U)								// RCC AHB1ENR register GPIOIEN Bit Position
+#define RCC_AHB1ENR_GPIOIEN_Mask 		(0x1 << RCC_AHB1ENR_GPIOIEN_Pos)	// RCC AHB1ENR register GPIOIEN Bit Mask
+#define RCC_AHB1ENR_GPIOIEN				RCC_AHB1ENR_GPIOIEN_Mask			// RCC AHB1ENR register GPIOIEN Macro
+
+#define RCC_AHB1ENR_GPIOJEN_Pos			(9U)								// RCC AHB1ENR register GPIOJEN Bit Position
+#define RCC_AHB1ENR_GPIOJEN_Mask 		(0x1 << RCC_AHB1ENR_GPIOJEN_Pos)	// RCC AHB1ENR register GPIOJEN Bit Mask
+#define RCC_AHB1ENR_GPIOJEN				RCC_AHB1ENR_GPIOJEN_Mask			// RCC AHB1ENR register GPIOJEN Macro
+
+#define RCC_AHB1ENR_GPIOKEN_Pos			(10U)								// RCC AHB1ENR register GPIOKEN Bit Position
+#define RCC_AHB1ENR_GPIOKEN_Mask 		(0x1 << RCC_AHB1ENR_GPIOKEN_Pos)	// RCC AHB1ENR register GPIOKEN Bit Mask
+#define RCC_AHB1ENR_GPIOKEN				RCC_AHB1ENR_GPIOKEN_Mask			// RCC AHB1ENR register GPIOKEN Macro
+
+#include "RCC.h"
 
 #endif /* INC_STM32F407XX_H_ */
