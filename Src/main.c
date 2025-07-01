@@ -21,6 +21,7 @@
 int main(void)
 {
 	RCC_GPIOA_CLK_EN();
+	GPIO_WritePin(GPIOA, GPIO_PIN_0 | GPIO_PIN_1, GPIO_PIN_SET);
 	RCC_GPIOB_CLK_EN();
 	RCC_GPIOC_CLK_EN();
 	RCC_GPIOD_CLK_EN();
@@ -31,6 +32,8 @@ int main(void)
 	RCC_GPIOI_CLK_EN();
 	RCC_GPIOJ_CLK_EN();
 	RCC_GPIOK_CLK_EN();
+
+
 
 	RCC_GPIOA_CLK_DIS();
 	RCC_GPIOB_CLK_DIS();

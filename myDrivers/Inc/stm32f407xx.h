@@ -248,5 +248,6 @@ typedef struct
 #define RCC_AHB1ENR_GPIOKEN				RCC_AHB1ENR_GPIOKEN_Mask			// RCC AHB1ENR register GPIOKEN Macro
 
 #include "RCC.h"
+#include "GPIO.h"
 
 #endif /* INC_STM32F407XX_H_ */

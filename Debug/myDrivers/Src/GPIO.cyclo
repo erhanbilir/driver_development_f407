@@ -1,0 +1,2 @@
+../myDrivers/Src/GPIO.c:20:6:GPIO_WritePin	2
+../myDrivers/Src/GPIO.c:32:15:GPIO_ReadPin	2

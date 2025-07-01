@@ -1,0 +1,2 @@
+../myDrivers/Src/GPIO.c:20:6:GPIO_WritePin	16	static
+../myDrivers/Src/GPIO.c:32:15:GPIO_ReadPin	24	static
