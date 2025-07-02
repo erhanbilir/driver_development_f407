@@ -7,6 +7,57 @@
 #include "GPIO.h"
 
 /*
+ * @brief GPIO_Init, configures the port and pins
+ *
+ * @param GPIOx = GPIO Port Base Address
+ *
+ * @param GPIO_ConfigStruct = GPIO configuration structure
+ *
+ * @retval void
+ */
+void GPIO_Init(GPIO_TypeDef *GPIOx, GPIO_InitTypeDef *GPIO_ConfigStruct)
+{
+	uint32_t position;
+	uint32_t fakePosition = 0;
+	uint32_t lastPosition = 0;
+	for (position = 0; position < GPIO_NUMBER_OF_PINS; position++)
+	{
+		fakePosition = (0x1 << position);
+		lastPosition = (uint32_t)( GPIO_ConfigStruct->pinNumber ) & fakePosition;
+
+		if (fakePosition == lastPosition)
+		{
+			/*!< Mode config */
+			uint32_t tempValue = GPIOx->MODER;
+			tempValue &= ~( 0x3U << (position * 2) );
+			tempValue |= ( GPIO_ConfigStruct->Mode << (position * 2) );
+			GPIOx->MODER = tempValue;
+
+			if (GPIO_ConfigStruct->Mode == GPIO_MODE_AF || GPIO_ConfigStruct->Mode == GPIO_MODE_OUTPUT)
+			{
+				/*!< Otype Config */
+				tempValue = GPIOx->OTYPER;
+				tempValue &= ~( 0x1U << position );
+				tempValue |= ( GPIO_ConfigStruct->Otype << position );
+				GPIOx->OTYPER = tempValue;
+
+				/*!< Ospeed Config */
+				tempValue = GPIOx->OSPEEDR;
+				tempValue &= ~(0x3U <<(position * 2) );
+				tempValue |= ( GPIO_ConfigStruct->Speed << (position * 2) );
+				GPIOx->OSPEEDR = tempValue;
+			}
+
+			/*!< Push-Pull Config */
+			tempValue = GPIOx->PUPDR;
+			tempValue &= ~( 0x3U << (position * 2) );
+			tempValue |= ( GPIO_ConfigStruct->PuPd << (position * 2) );
+			GPIOx->PUPDR = tempValue;
+		}
+	}
+}
+
+/*
  * @brief GPIO_Write_Pin, Makes pin high or low
  *
  * @param GPIOx = GPIO Port Base Address

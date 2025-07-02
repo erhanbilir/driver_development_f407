@@ -18,34 +18,44 @@
 
 #include "stm32f407xx.h"
 
+static void GPIO_LedConfig();
+
 int main(void)
 {
-	RCC_GPIOA_CLK_EN();
-	GPIO_WritePin(GPIOA, GPIO_PIN_0 | GPIO_PIN_1, GPIO_PIN_SET);
-	RCC_GPIOB_CLK_EN();
-	RCC_GPIOC_CLK_EN();
 	RCC_GPIOD_CLK_EN();
-	RCC_GPIOE_CLK_EN();
-	RCC_GPIOF_CLK_EN();
-	RCC_GPIOG_CLK_EN();
-	RCC_GPIOH_CLK_EN();
-	RCC_GPIOI_CLK_EN();
-	RCC_GPIOJ_CLK_EN();
-	RCC_GPIOK_CLK_EN();
-
-
-
-	RCC_GPIOA_CLK_DIS();
-	RCC_GPIOB_CLK_DIS();
-	RCC_GPIOC_CLK_DIS();
-	RCC_GPIOD_CLK_DIS();
-	RCC_GPIOE_CLK_DIS();
-	RCC_GPIOF_CLK_DIS();
-	RCC_GPIOG_CLK_DIS();
-	RCC_GPIOH_CLK_DIS();
-	RCC_GPIOI_CLK_DIS();
-	RCC_GPIOJ_CLK_DIS();
-	RCC_GPIOK_CLK_DIS();
+	GPIO_LedConfig();
+	while(1)
+	{
+		GPIO_Write_Pin(GPIOD, GPIO_PIN_12, GPIO_PIN_SET);
+		for(uint32_t counter = 0; counter < 999999; counter++);
+		GPIO_Write_Pin(GPIOD, GPIO_PIN_13, GPIO_PIN_SET);
+		for(uint32_t counter = 0; counter < 999999; counter++);
+		GPIO_Write_Pin(GPIOD, GPIO_PIN_14, GPIO_PIN_SET);
+		for(uint32_t counter = 0; counter < 999999; counter++);
+		GPIO_Write_Pin(GPIOD, GPIO_PIN_15, GPIO_PIN_SET);
+		for(uint32_t counter = 0; counter < 999999; counter++);
+		GPIO_Write_Pin(GPIOD, GPIO_PIN_12, GPIO_PIN_RESET);
+		for(uint32_t counter = 0; counter < 999999; counter++);
+		GPIO_Write_Pin(GPIOD, GPIO_PIN_13, GPIO_PIN_RESET);
+		for(uint32_t counter = 0; counter < 999999; counter++);
+		GPIO_Write_Pin(GPIOD, GPIO_PIN_14, GPIO_PIN_RESET);
+		for(uint32_t counter = 0; counter < 999999; counter++);
+		GPIO_Write_Pin(GPIOD, GPIO_PIN_15, GPIO_PIN_RESET);
+		for(uint32_t counter = 0; counter < 999999; counter++);
+	}
     /* Loop forever */
 	for(;;);
+}
+
+static void GPIO_LedConfig()
+{
+	GPIO_InitTypeDef ledConfig = {0};
+
+	ledConfig.pinNumber = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
+	ledConfig.Mode = GPIO_MODE_OUTPUT;
+	ledConfig.Otype = GPIO_OTYPE_PP;
+	ledConfig.PuPd = GPIO_PUPDR_NOPULL;
+	ledConfig.Speed = GPIO_OSPEED_HIGH;
+
+	GPIO_Init(GPIOD, &ledConfig);
 }
