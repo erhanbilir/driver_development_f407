@@ -87,5 +87,6 @@ void GPIO_Init(GPIO_TypeDef *GPIOx, GPIO_InitTypeDef *GPIO_ConfigStruct);
 void GPIO_Write_Pin(GPIO_TypeDef *GPIOx, uint16_t pinNumber, GPIO_PinState pinState);
 GPIO_PinState GPIO_Read_Pin(GPIO_TypeDef *GPIOx, uint16_t pinNumber);
 void GPIO_Lock_Pin(GPIO_TypeDef *GPIOx, uint16_t pinNumber);
+void GPIO_TogglePin(GPIO_TypeDef *GPIOx, uint16_t pinNumber);
 
 #endif /* INC_GPIO_H_ */

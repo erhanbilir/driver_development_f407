@@ -28,31 +28,31 @@ void GPIO_Init(GPIO_TypeDef *GPIOx, GPIO_InitTypeDef *GPIO_ConfigStruct)
 		if (fakePosition == lastPosition)
 		{
 			/*!< Mode config */
-			uint32_t tempValue = GPIOx->MODER;
-			tempValue &= ~( 0x3U << (position * 2) );
-			tempValue |= ( GPIO_ConfigStruct->Mode << (position * 2) );
-			GPIOx->MODER = tempValue;
+			uint32_t tempReg = GPIOx->MODER;
+			tempReg &= ~( 0x3U << (position * 2) );
+			tempReg |= ( GPIO_ConfigStruct->Mode << (position * 2) );
+			GPIOx->MODER = tempReg;
 
 			if (GPIO_ConfigStruct->Mode == GPIO_MODE_AF || GPIO_ConfigStruct->Mode == GPIO_MODE_OUTPUT)
 			{
 				/*!< Otype Config */
-				tempValue = GPIOx->OTYPER;
-				tempValue &= ~( 0x1U << position );
-				tempValue |= ( GPIO_ConfigStruct->Otype << position );
-				GPIOx->OTYPER = tempValue;
+				tempReg = GPIOx->OTYPER;
+				tempReg &= ~( 0x1U << position );
+				tempReg |= ( GPIO_ConfigStruct->Otype << position );
+				GPIOx->OTYPER = tempReg;
 
 				/*!< Ospeed Config */
-				tempValue = GPIOx->OSPEEDR;
-				tempValue &= ~(0x3U <<(position * 2) );
-				tempValue |= ( GPIO_ConfigStruct->Speed << (position * 2) );
-				GPIOx->OSPEEDR = tempValue;
+				tempReg = GPIOx->OSPEEDR;
+				tempReg &= ~(0x3U <<(position * 2) );
+				tempReg |= ( GPIO_ConfigStruct->Speed << (position * 2) );
+				GPIOx->OSPEEDR = tempReg;
 			}
 
 			/*!< Push-Pull Config */
-			tempValue = GPIOx->PUPDR;
-			tempValue &= ~( 0x3U << (position * 2) );
-			tempValue |= ( GPIO_ConfigStruct->PuPd << (position * 2) );
-			GPIOx->PUPDR = tempValue;
+			tempReg = GPIOx->PUPDR;
+			tempReg &= ~( 0x3U << (position * 2) );
+			tempReg |= ( GPIO_ConfigStruct->PuPd << (position * 2) );
+			GPIOx->PUPDR = tempReg;
 		}
 	}
 }
@@ -112,11 +112,27 @@ GPIO_PinState GPIO_Read_Pin(GPIO_TypeDef *GPIOx, uint16_t pinNumber)
  */
 void GPIO_Lock_Pin(GPIO_TypeDef *GPIOx, uint16_t pinNumber)
 {
-	uint32_t tempValue = (0x1U << 16) | pinNumber;
+	uint32_t tempReg = (0x1U << 16) | pinNumber;
 
-	GPIOx->LCKR = tempValue; // LCKR[16] = '1' + LCKR[15:0] = pinNumber
+	GPIOx->LCKR = tempReg; // LCKR[16] = '1' + LCKR[15:0] = pinNumber
 	GPIOx->LCKR = pinNumber; // LCKR[16] = '0' + LCKR[15:0] = pinNumber
-	GPIOx->LCKR = tempValue; // LCKR[16] = '1' + LCKR[15:0] = pinNumber
+	GPIOx->LCKR = tempReg; // LCKR[16] = '1' + LCKR[15:0] = pinNumber
 
-	tempValue = GPIOx->LCKR; // Read Lock Register
+	tempReg = GPIOx->LCKR; // Read Lock Register
+}
+
+/*
+ * @brief GPIO_Toggle_Pin, toggles the pin of GPIOx port
+ *
+ * @param GPIOx = GPIO Port Base Address
+ *
+ * @param pinNumber = GPIO Pin Numbers 0 - 15
+ *
+ * @retval void
+ */
+void GPIO_TogglePin(GPIO_TypeDef *GPIOx, uint16_t pinNumber)
+{
+	uint32_t tempReg = GPIOx->ODR;
+
+	GPIOx->BSRR = ( (tempReg & pinNumber) << 16 ) | ( ~tempReg & pinNumber);
 }
